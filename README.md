@@ -24,9 +24,6 @@ This repository is structured as follow:
 -   [`data/`](https://github.com/david-beauchesne/fndat/tree/master/data):
     contains all raw data required to perform analyses
 
--   [`analyses/`](https://github.com/david-beauchesne/fndat/tree/master/analyses/):
-    contains R scripts to run each step of the workflow
-
 -   [`outputs/`](https://github.com/david-beauchesne/fndat/tree/master/outputs):
     contains all the results created during the workflow
 
@@ -42,19 +39,4 @@ This repository is structured as follow:
 -   [`DESCRIPTION`](https://github.com/david-beauchesne/fndat/tree/master/DESCRIPTION):
     contains project metadata (author, date, dependencies, etc.)
 
--   [`make.R`](https://github.com/david-beauchesne/fndat/tree/master/make.R):
-    main R script to run the entire project by calling each R script
-    stored in the `analyses/` folder
 
-### Usage
-
-Clone the repository, open R/RStudio and run:
-
-    source("make.R")
-
-### Notes
-
--   All required packages, listed in the `DESCRIPTION` file, will be
-    installed (if necessary)
--   All required packages and R functions will be loaded
--   Some analyses listed in the `make.R` might take time
