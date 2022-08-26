@@ -19,3 +19,15 @@
 # User-specific files ----
 README.html
 inst/doc
+
+# Data ----
+data/data-grid/
+data/data-raw/
+data/data-format/*.geojson
+data/data-format/*.csv
+data/data-format/*.tif
+data/data-integrated/*.geojson
+data/data-integrated/*.csv
+data/data-integrated/*.tif
+data/data-basemap/*.geojson
+figures/

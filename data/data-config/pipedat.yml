@@ -1,0 +1,12 @@
+data_workflow:
+  parameters: 
+    crs: 4326
+    bbox:
+      xmin:
+      ymin:
+      xmax:
+      ymax:  
+  data_pipelines:
+    - "70efb2b0" # Native Land Digital
+  integration_pipelines:
+    # - "e2b7e6c4" # Fisheries

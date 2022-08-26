@@ -18,3 +18,12 @@ msgInfo <- function(..., appendLF = TRUE) {
   message(crayon::green(txt), appendLF = appendLF)
   invisible(txt)
 }
+
+# ------------------------------------------------------------------------------
+# Params 
+global_param <- function() {
+  assign(x = "param",
+         value = yaml::read_yaml("./data/data-config/global_parameters.yml"),
+         envir = globalenv())
+}
+ 
