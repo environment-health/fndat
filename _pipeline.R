@@ -5,6 +5,9 @@ pipeline <- function() {
   # Update global parameters
   global_param()
   
+  # Update search on open government
+  keysearch()
+  
   # Get area of interest 
   get_aoi()
   

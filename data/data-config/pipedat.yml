@@ -8,5 +8,7 @@ data_workflow:
       ymax:  
   data_pipelines:
     - "70efb2b0" # Native Land Digital
+    - "ce594316" # First Nations Location
+    - "621e9a76" # Inuit Communities Location
   integration_pipelines:
     # - "e2b7e6c4" # Fisheries
