@@ -1,22 +1,22 @@
 #' Function to perform and update resarch for resources on open government base on certain keywords
 #'
-#' This function is used to research resources on the canadian open government portal 
-#' (https://open.canada.ca/en) using the `rgovcan` package. It allows the user to perform a 
-#' using a series of keywords and store the results. The results can then be marked as verified 
-#' so that the next research will discard them automatically and either show only unverified 
-#' resources or new resources available on the portal since the last research. 
-#' 
-#' For now, verified resources must be added manually in './inst/extdata/verified.csv'. 
+#' This function is used to research resources on the canadian open government portal
+#' (https://open.canada.ca/en) using the `rgovcan` package. It allows the user to perform a
+#' using a series of keywords and store the results. The results can then be marked as verified
+#' so that the next research will discard them automatically and either show only unverified
+#' resources or new resources available on the portal since the last research.
+#'
+#' For now, verified resources must be added manually in './inst/extdata/verified.csv'.
 #'
 #' @return A list of resources
 #'
 #' @export
 #'
 #' @export
-keysearch <- function() {  
+keysearch <- function() {
   # Setup rgovcan
   rgovcan::govcan_setup()
-  
+
   # Load lists
   key <- load_key()
   verif <- load_verif()
@@ -24,58 +24,68 @@ keysearch <- function() {
 
   # Perform and export searches
   srch <- list()
-  for(i in 1:nrow(key)) {
-    
+  for (i in 1:nrow(key)) {
+
     # Search
     dat <- rgovcan::govcan_search(
-        keywords = key$keywords[i], 
-        records = 1e6,
-        format = TRUE
-      )
-    
+      keywords = key$keywords[i],
+      records = 1e6,
+      format = TRUE
+    )
+
     # Filter
     dat <- cbind(
       dplyr::select(dat, id, title, jurisdiction),
       dat$organization$title
     ) |>
-    dplyr::arrange(
-      jurisdiction,
-      title
-    )
-    
-    # Update keywords dataset 
+      dplyr::arrange(
+        jurisdiction,
+        title
+      )
+
+    # Update keywords dataset
     key$count_old[i] <- key$count_new[i]
     key$count_new[i] <- nrow(dat)
     key$timestamp[i] <- timestamp()
-        
+
     # Export research
     write.csv(
-      dat, 
+      dat,
       file = glue::glue("data/data-search/search-{key$key_id[i]}.csv"),
       row.names = FALSE
-    ) 
-    
+    )
+
     # Check which ones still have to be verified
     uid <- !dat$id %in% verif$id
     chk <- data.frame(id = c(chk$id, dat$id[uid])) |>
-           unique()
+      unique()
   }
 
-  # Export updated keywords 
+  # Export updated keywords
+  key$count_old[key$count_old == ""] <- "0"
   write.csv(
-    key, 
+    key,
     file = "data/data-search/search_keywords.csv",
     row.names = FALSE
   )
 
-  # Export updated data to check 
+  # Export updated data to check
   write.csv(
-    chk, 
+    chk,
     file = "data/data-search/check.csv",
     row.names = FALSE
   )
 
-
+  # Messages
+  nw <- sum(as.numeric(key$count_new))
+  old <- sum(as.numeric(key$count_old))
+  gp <- nw - old
+  if (gp > 0) {
+    msgInfo(glue::glue("The search yielded {gp} new resources."))
+  }
+  if (nrow(chk > 0)) {
+    msgInfo(glue::glue("There are {nrow(chk)} resources to check."))
+  }
 }
 
 # Load keywords dataset
@@ -86,7 +96,7 @@ load_key <- function() {
   )
 }
 
-# Load verified datasets 
+# Load verified datasets
 load_verif <- function() {
   read.csv(
     "data/data-search/verified.csv",
@@ -94,13 +104,10 @@ load_verif <- function() {
   )
 }
 
-# Load datasets that need to be verified 
+# Load datasets that need to be verified
 load_check <- function() {
   read.csv(
     "data/data-search/check.csv",
     colClasses = "character"
   )
 }
-
-
-
