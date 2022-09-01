@@ -41,6 +41,9 @@ keysearch <- function() {
       dplyr::arrange(
         jurisdiction,
         title
+      ) |>
+      dplyr::rename(
+         organization = "dat$organization$title"
       )
 
     # Update keywords dataset
@@ -48,6 +51,9 @@ keysearch <- function() {
     key$count_new[i] <- nrow(dat)
     key$timestamp[i] <- timestamp()
 
+    # Store in list 
+    srch[[i]] <- dat
+    
     # Export research
     write.csv(
       dat,
@@ -70,6 +76,9 @@ keysearch <- function() {
   )
 
   # Export updated data to check
+  srch <- dplyr::bind_rows(srch) |>
+          unique()
+  chk <- dplyr::left_join(chk, srch, by = "id")
   write.csv(
     chk,
     file = "data/data-search/check.csv",
