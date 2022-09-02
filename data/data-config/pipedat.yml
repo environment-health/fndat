@@ -10,5 +10,9 @@ data_workflow:
     - "70efb2b0" # Native Land Digital
     - "ce594316" # First Nations Location
     - "621e9a76" # Inuit Communities Location
+    - "786f7481" # Aboriginal Lands of Canada Legislative Boundaries
+    - "7a44eaf0" # Tribal Councils Location
+    - "3fa4aeb6" # Inuit Regions
+    # - "103a233e" # Terrestrial human footprint 
   integration_pipelines:
     # - "e2b7e6c4" # Fisheries
