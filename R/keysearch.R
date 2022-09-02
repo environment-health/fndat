@@ -62,9 +62,9 @@ keysearch <- function() {
     )
 
     # Check which ones still have to be verified
-    uid <- !dat$id %in% verif$id
-    chk <- data.frame(id = c(chk$id, dat$id[uid])) |>
-      unique()
+    chk <- data.frame(id = c(chk$id, dat$id)) |>
+           unique() |>
+           dplyr::filter(!id %in% verif$id)
   }
 
   # Export updated keywords
