@@ -14,6 +14,9 @@ data_workflow:
     - "7a44eaf0" # Tribal Councils Location
     - "3fa4aeb6" # Inuit Regions
     - "e328da3a" # Community Well-Being Index
+    - "091d10ec" # Mercury concentrations in the Canadian Arctic marine ecosystem
+    - "0bf96a89" # Perfluoroalkyl substances (PFAS) in the Canadian Arctic marine ecosystem
+    - "caa1fb75" # Concentrations of OPEs and PBDEs in the North Atlantic Ocean
     # - "103a233e" # Terrestrial human footprint 
   integration_pipelines:
     # - "e2b7e6c4" # Fisheries
