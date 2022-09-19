@@ -17,6 +17,7 @@ data_workflow:
     - "091d10ec" # Mercury concentrations in the Canadian Arctic marine ecosystem
     - "0bf96a89" # Perfluoroalkyl substances (PFAS) in the Canadian Arctic marine ecosystem
     - "caa1fb75" # Concentrations of OPEs and PBDEs in the North Atlantic Ocean
+    - "b5433840" # Geolocated placenames in Canada
     # - "103a233e" # Terrestrial human footprint 
   integration_pipelines:
     # - "e2b7e6c4" # Fisheries
